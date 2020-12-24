@@ -70,7 +70,7 @@ class ShowTaskList extends React.Component{
     }
     else if(this.state.show === 'createTask'){
       return(
-        <CreateTaskForm ShowAll = {this.ShowAll}/>
+        <CreateTaskForm ChangeArrayOfTasks = {this.ChangeArrayOfTasks} ShowAll = {this.ShowAll}/>
       )
     }
     else if(this.state.show === 'editTask'){

@@ -139,7 +139,6 @@ class CreateTaskForm extends React.Component{
       }
       else{
         if(arrayOfTasks){
-          arrayOfTasks = JSON.parse(arrayOfTasks);
           arrayOfTasks.push(task);
           localStorage.setItem('listOfTasks', JSON.stringify(arrayOfTasks));
           this.props.ShowAll();
@@ -162,24 +161,24 @@ class CreateTaskForm extends React.Component{
         <div id = "createForm">
             <div>
               <span>First name</span>
-              <input value = {this.props.task.firstName} id = "firstName" onChange = {TestFirstName}/>    
+              <input defaultValue = {this.props.task.firstName} id = "firstName" onChange = {TestFirstName}/>    
             </div>
   
             <div>
               <span>Last name</span>
-              <input value = {this.props.task.lastName} onChange = {TestLastName} id = "lastName"/>    
+              <input defaultValue = {this.props.task.lastName} onChange = {TestLastName} id = "lastName"/>    
             </div>
   
             <div>
               <span>email</span>
-              <input value = {this.props.task.email} onChange = {TestEmail} id = "email"/>    
+              <input defaultValue = {this.props.task.email} onChange = {TestEmail} id = "email"/>    
             </div>
   
             <div id = "fromTo">
               <span>from</span>
-              <input value = {this.props.task.dataStart} onChange = {TestDateFrom} id = "from" type = "date"/>  
+              <input defaultValue = {this.props.task.dataStart} onChange = {TestDateFrom} id = "from" type = "date"/>  
               <span>to</span>
-              <input value = {this.props.task.dataEnd} onChange = {TestDateTo} id = "to" type = "date"/>  
+              <input defaultValue = {this.props.task.dataEnd} onChange = {TestDateTo} id = "to" type = "date"/>  
             </div>
   
             <div >
