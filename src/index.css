@@ -1,13 +1,86 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#createForm{
+  width: 40%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#createForm div{
+  display: flex;
+  margin-bottom: 1%;
+}
+
+#createForm div span{
+  width: 20%;
+  margin-right: 2%;
+}
+
+#fromTo :nth-child(3) {
+  width: auto;
+  margin-left: 2%;
+}
+
+#report span{
+  margin-left: 1%;
+}
+
+#comment{
+  display: flex;
+  flex-direction: column;
+}
+
+#comment textarea{
+  width: 80%;
+}
+
+#createForm button{
+  margin: 0 auto;
+}
+
+.task{
+  margin-bottom: 5%;
+}
+
+.task div{
+  margin-bottom: 2%;
+}
+
+.task .userInfo{
+  display: flex;
+  width: 100%;
+}
+
+.task .additionalInfo{
+  display: flex;
+  width: 100%;
+}
+
+.task span{
+  width: 10%;
+  margin-right: 2%;
+}
+
+#sorterFilter{
+  margin-bottom: 2%;
+}
+
+#sorterFilter span{
+  margin-right: 0.5%;
+}
+
+#sorterFilter select{
+  margin-right: 3%;
+}
+
+#deleteForm{
+  margin-bottom: 2%;
+}
+
+#deleteForm span{
+  margin-right: 0.5%;
+}
+
+#startEditForm{
+  margin-bottom: 2%;
+}
+
+#startEditForm span{
+  margin-right: 0.5%;
 }
