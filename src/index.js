@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
@@ -6,79 +6,45 @@ import reportWebVitals from './reportWebVitals';
 import {CreateTaskForm} from './createTaskForm';
 import {TaskForm} from './taskForm.js';
 import {SorterFilter} from './SorterFinder';
-import {DeleteSomeOne} from './deleteSomeOne';
-import {EditSomeOne} from './editSomeOne';
 
-class ShowTaskList extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = ({
-      show: 'tasksList',
-      arrayOfTasks: JSON.parse(localStorage.getItem('listOfTasks')),
-      index: 0,
-      task: ''
-    });
+
+function ShowTaskList(){
+  const [show, setShow] = useState('taskList');
+  const [arrayOfTasks, setArrayOfTasks] = useState(JSON.parse(localStorage.getItem('listOfTasks')));
+  const [index, setIndex] = useState(0);
+  const [task, setTask] = useState('');
+  if(show === 'taskList'){
+    if(arrayOfTasks){
+      return(
+        <div id = "listOfTasks">
+          <SorterFilter  changeArrayOfTasks = {setArrayOfTasks}/>
+          {
+            arrayOfTasks.map( (element, index) => ( <TaskForm changeArrayOfTasks = {setArrayOfTasks} setIndex = {setIndex} setTask = {setTask}
+                               setShow = {setShow} key = {index} id = {index} data = {element}/>))
+          }
+          <button onClick = {() => setShow('createTask')}>more</button>
+        </div>
+      )
+    }
+    else{
+      return(
+        <div id = "listOfTasks">
+          <button onClick = {() => setShow('createTask')}>more</button>
+        </div>
+      )
+    }
+  }
+  else if(show === 'createTask'){
+    return(
+      <CreateTaskForm changeArrayOfTasks = {setArrayOfTasks} showAll = {setShow}/>
+    )
+  }
+  else if(show === 'editTask'){
+    return(
+      <CreateTaskForm changeArrayOfTasks = {setArrayOfTasks} showAll = {setShow} index = {index} task = {task}/>
+    )
+  }
   
-    this.OnMoreClick = this.OnMoreClick.bind(this);
-    this.ShowAll = this.ShowAll.bind(this);
-    this.ChangeArrayOfTasks = this.ChangeArrayOfTasks.bind(this);
-    this.SetIndexAndTask = this.SetIndexAndTask.bind(this);
-  }
-
-  OnMoreClick(){
-    this.setState({show: 'createTask'});
-  }
-
-  ShowAll(){
-    this.setState({show: 'tasksList'});
-  }
-
-  ChangeArrayOfTasks(massive){
-    this.setState({arrayOfTasks: massive});
-  }
-
-  SetIndexAndTask(index, task){
-    this.setState({index: index});
-    this.setState({task: task});
-    this.setState({show: 'editTask'})
-  }
-
-  render(){
-    if(this.state.show === 'tasksList'){
-      if(this.state.arrayOfTasks){
-        
-        return(
-          <div id = "listOfTasks">
-            <SorterFilter  ChangeArrayOfTasks = {this.ChangeArrayOfTasks}/>
-            <DeleteSomeOne ChangeArrayOfTasks = {this.ChangeArrayOfTasks}/>
-            <EditSomeOne SetIndexAndTask = {this.SetIndexAndTask}/>
-            {
-              this.state.arrayOfTasks.map( element => ( <TaskForm data = {element}/>))
-            }
-            <button onClick = {this.OnMoreClick}>more</button>
-          </div>
-        )
-      }
-      else{
-        return(
-          <div id = "listOfTasks">
-            <button onClick = {this.OnMoreClick}>more</button>
-          </div>
-        )
-      }
-      
-    }
-    else if(this.state.show === 'createTask'){
-      return(
-        <CreateTaskForm ChangeArrayOfTasks = {this.ChangeArrayOfTasks} ShowAll = {this.ShowAll}/>
-      )
-    }
-    else if(this.state.show === 'editTask'){
-      return(
-        <CreateTaskForm ChangeArrayOfTasks = {this.ChangeArrayOfTasks} ShowAll = {this.ShowAll} index = {this.state.index} task = {this.state.task}/>
-      )
-    }
-  }
 }
 
 ReactDOM.render(

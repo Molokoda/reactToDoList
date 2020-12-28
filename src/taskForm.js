@@ -1,5 +1,23 @@
 import React from 'react';
 
+function getTask(key , setIndex, setTask, setShow){
+    
+    let arrayOfTasks = JSON.parse(localStorage.getItem('listOfTasks'));
+    setIndex(key);
+    setTask(arrayOfTasks[key]);
+    setShow('editTask');
+}
+
+function deleteOne(key, changeArrayOfTasks){
+    let arrayOfData = JSON.parse(localStorage.getItem('listOfTasks'));
+    for(let i = key; i < arrayOfData.length - 1; i++){
+        arrayOfData[i] = arrayOfData[i + 1];
+    }
+    arrayOfData.length -= 1;
+    localStorage.setItem('listOfTasks', JSON.stringify(arrayOfData));
+    changeArrayOfTasks(arrayOfData);
+}
+
 function TaskForm(props){
     return(
         <div className = "task">
@@ -18,6 +36,11 @@ function TaskForm(props){
 
             <div>
                 <span>task: {props.data.comment}</span>
+            </div>
+
+            <div>
+                <button onClick = {() => getTask(props.id, props.setIndex, props.setTask, props.setShow)}>edit</button>
+                <button onClick = {() => deleteOne(props.id, props.changeArrayOfTasks)}>delete</button>
             </div>
         </div>
     )
